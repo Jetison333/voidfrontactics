@@ -1,10 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://c00yc15giv5p5"]
+[gd_scene load_steps=5 format=3 uid="uid://c00yc15giv5p5"]
+
+[ext_resource type="Script" uid="uid://cj2mfkb6cvile" path="res://scripts/shipscript.gd" id="1_3cxh5"]
+[ext_resource type="Texture2D" uid="uid://b6w4a2kkwt6cy" path="res://assets/ship.png" id="2_jt8rb"]
+[ext_resource type="Texture2D" uid="uid://bax8kp50qbelq" path="res://assets/selected.png" id="3_k8gom"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p68iw"]
 
 [node name="Ship" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_3cxh5")
+player_sprite = ExtResource("2_jt8rb")
+enemy_sprite = ExtResource("2_jt8rb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ShipSprite" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("2_jt8rb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(10.275, 10.275)
 shape = SubResource("CircleShape2D_p68iw")
+
+[node name="SelectedSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_k8gom")

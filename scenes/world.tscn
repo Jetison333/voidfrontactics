@@ -1,18 +1,70 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2w0nnuo4060i"]
+[gd_scene load_steps=10 format=3 uid="uid://b2w0nnuo4060i"]
 
-[ext_resource type="Texture2D" uid="uid://bbfbav4gyfwwk" path="res://assets/background.png" id="1_rwgxs"]
+[ext_resource type="Script" uid="uid://cx2mk4d2e4wxr" path="res://scripts/main.gd" id="1_4wyf3"]
+[ext_resource type="Texture2D" uid="uid://bhog8lr1mfxy1" path="res://assets/BG/BG_1.png" id="2_4mrxx"]
 [ext_resource type="Script" uid="uid://m0x35ih0e0in" path="res://scripts/camera_2d.gd" id="2_4wyf3"]
+[ext_resource type="Texture2D" uid="uid://b0cam470dek8c" path="res://assets/BG/BG_2.png" id="3_7r4gi"]
+[ext_resource type="Script" uid="uid://dqcggmrwk3gmi" path="res://scripts/boundary.gd" id="4_k0juu"]
+[ext_resource type="Texture2D" uid="uid://bq8q5cvhmxtw0" path="res://assets/BG/BG_3.png" id="4_w7kh3"]
+[ext_resource type="Texture2D" uid="uid://r1xe1pef7du8" path="res://assets/BG/BG_4.png" id="5_e3hyu"]
+[ext_resource type="Script" uid="uid://bvnubp8y537xq" path="res://scripts/spawner.gd" id="9_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://clu6dkf1khs6c" path="res://scenes/ships/destroyer.tscn" id="9_w7kh3"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_4wyf3")
 
 [node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2"]
-motion_mirroring = Vector2(1000, 1000)
+motion_scale = Vector2(0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer"]
-position = Vector2(-8, -13)
-texture = ExtResource("1_rwgxs")
+texture_repeat = 2
+scale = Vector2(5, 5)
+texture = ExtResource("2_4mrxx")
+region_enabled = true
+region_rect = Rect2(0, 0, 12000, 6800)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer2"]
+z_index = 1
+texture_repeat = 2
+scale = Vector2(5, 5)
+texture = ExtResource("3_7r4gi")
+region_enabled = true
+region_rect = Rect2(0, 0, 12000, 6800)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.4, 0.4)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer3"]
+z_index = 2
+texture_repeat = 2
+scale = Vector2(5, 5)
+texture = ExtResource("4_w7kh3")
+region_enabled = true
+region_rect = Rect2(0, 0, 12000, 6800)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer4"]
+z_index = 3
+texture_repeat = 2
+scale = Vector2(5, 5)
+texture = ExtResource("5_e3hyu")
+region_enabled = true
+region_rect = Rect2(0, 0, 12000, 6800)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_enabled = false
 script = ExtResource("2_4wyf3")
+
+[node name="boundary" type="Node2D" parent="."]
+script = ExtResource("4_k0juu")
+
+[node name="spawner" type="Node2D" parent="."]
+script = ExtResource("9_7r4gi")
+destroyer = ExtResource("9_w7kh3")
