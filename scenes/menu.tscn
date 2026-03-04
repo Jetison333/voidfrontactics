@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyjin5objl8tp"]
+
+[ext_resource type="Script" uid="uid://cr1l2a01myy0x" path="res://scripts/menu.gd" id="1_yqeox"]
+[ext_resource type="Texture2D" uid="uid://bhog8lr1mfxy1" path="res://assets/BG/BG_1.png" id="2_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://b0cam470dek8c" path="res://assets/BG/BG_2.png" id="3_g3eks"]
+[ext_resource type="Texture2D" uid="uid://bq8q5cvhmxtw0" path="res://assets/BG/BG_3.png" id="4_v86rl"]
+[ext_resource type="Texture2D" uid="uid://r1xe1pef7du8" path="res://assets/BG/BG_4.png" id="5_13sgg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i6lef"]
+font_size = 40
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_yqeox")
+
+[node name="LevelList" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 281.0
+offset_right = 588.0
+offset_bottom = 321.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 146.0
+offset_right = 735.0
+offset_bottom = 201.0
+text = "Voidfront Tactics"
+label_settings = SubResource("LabelSettings_i6lef")
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer"]
+texture_repeat = 2
+scale = Vector2(5, 5)
+texture = ExtResource("2_4ytvr")
+region_enabled = true
+region_rect = Rect2(0, 0, 12000, 6800)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer2"]
+z_index = 1
+texture_repeat = 2
+scale = Vector2(5, 5)
+texture = ExtResource("3_g3eks")
+region_enabled = true
+region_rect = Rect2(0, 0, 12000, 6800)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.4, 0.4)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer3"]
+z_index = 2
+texture_repeat = 2
+scale = Vector2(5, 5)
+texture = ExtResource("4_v86rl")
+region_enabled = true
+region_rect = Rect2(0, 0, 12000, 6800)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer4"]
+z_index = 3
+texture_repeat = 2
+scale = Vector2(5, 5)
+texture = ExtResource("5_13sgg")
+region_enabled = true
+region_rect = Rect2(0, 0, 12000, 6800)

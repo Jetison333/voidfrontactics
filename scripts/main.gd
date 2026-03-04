@@ -1,15 +1,18 @@
 extends Node2D
 
 @export var bounds: Rect2 = Rect2(0, 0, 1000, 1000)
+@export var patrol_points: Array[Vector2]
 
 var selected_ships: Array[Ship] = []
 
 var drag_start: Vector2 = Vector2.ZERO
 var is_dragging: bool = false
-const DRAG_THRESHOLD: float = 5.0  # pixels before drag starts
+const DRAG_THRESHOLD: float = 15.0  # pixels before drag starts
 
 func clear_selected_ships() -> void:
 	for ship in selected_ships:
+		if not is_instance_valid(ship):
+			continue
 		ship.set_selected(false)
 	selected_ships.clear()
 
@@ -56,6 +59,8 @@ func move_selected_to(pos: Vector2):
 	pos.x = clampf(pos.x, bounds.position.x, bounds.end.x)
 	pos.y = clampf(pos.y, bounds.position.y, bounds.end.y)
 	for ship in selected_ships:
+		if not is_instance_valid(ship):
+			continue
 		ship.set_destination(pos)
 		
 func _draw():
@@ -68,7 +73,18 @@ func _draw():
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	var done: bool = true
+	for ship in get_tree().get_nodes_in_group("ships"):
+		if ship.team == "enemy":
+			done = false
+	if done:
+		get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	
+	done = true
+	for ship in get_tree().get_nodes_in_group("ships"):
+		if ship.team == "player":
+			done = false
+	if done:
+		get_tree().change_scene_to_file("res://scenes/menu.tscn")

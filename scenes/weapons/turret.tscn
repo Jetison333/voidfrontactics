@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5aigp5udwa67"]
+
+[ext_resource type="Script" uid="uid://dqmnh6sxp3p2w" path="res://scripts/turret.gd" id="1_rjn0f"]
+[ext_resource type="PackedScene" uid="uid://c2bqx4cnn3dw2" path="res://scenes/weapons/bullet.tscn" id="2_teyys"]
+
+[node name="turret" type="Node2D"]
+script = ExtResource("1_rjn0f")
+bullet_scene = ExtResource("2_teyys")
+
+[node name="BarrelTip" type="Marker2D" parent="."]

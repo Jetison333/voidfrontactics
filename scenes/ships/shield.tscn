@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://dqp0fmnsb0psm"]
+
+[ext_resource type="PackedScene" uid="uid://c00yc15giv5p5" path="res://scenes/ships/ship.tscn" id="1_8wf2p"]
+[ext_resource type="PackedScene" uid="uid://b5aigp5udwa67" path="res://scenes/weapons/turret.tscn" id="2_yoqtp"]
+[ext_resource type="Texture2D" uid="uid://4eoaigke03p1" path="res://assets/RedShield/Red_Shield_0000.png" id="3_4gurd"]
+[ext_resource type="Script" uid="uid://cfbo7igjy1j06" path="res://scenes/ships/shield.gd" id="4_bcdae"]
+[ext_resource type="Texture2D" uid="uid://dol6fl2xvq4o7" path="res://assets/RedShield/Red_Shield_0001.png" id="4_iuije"]
+[ext_resource type="Script" uid="uid://2sndhwxn18qr" path="res://scenes/ships/healthbar.gd" id="5_ds5ji"]
+[ext_resource type="Texture2D" uid="uid://knw1d50y5gtg" path="res://assets/RedShield/Red_Shield_0002.png" id="5_mc2yc"]
+[ext_resource type="Texture2D" uid="uid://db46cw3gbrqj4" path="res://assets/BlueShield/Blue_Shield_0000.png" id="6_jsmcf"]
+[ext_resource type="Texture2D" uid="uid://7u2d7ijinn86" path="res://assets/BlueShield/Blue_Shield_0001.png" id="7_su4y2"]
+[ext_resource type="Texture2D" uid="uid://dr8vyikwjbpjs" path="res://assets/BlueShield/Blue_Shield_0002.png" id="8_xqwol"]
+[ext_resource type="Texture2D" uid="uid://b28nhrpbpj8tg" path="res://assets/shield.webp" id="11_iuije"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bcdae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4gurd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iuije")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mc2yc")
+}],
+"loop": true,
+"name": &"enemy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_jsmcf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_su4y2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xqwol")
+}],
+"loop": true,
+"name": &"player",
+"speed": 5.0
+}]
+
+[node name="Ship" unique_id=1502945073 node_paths=PackedStringArray("ShipSprite") instance=ExtResource("1_8wf2p")]
+ShipSprite = NodePath("ShieldShipSprite")
+turn_speed = 1.0
+max_speed = 30.0
+forward_thrust = 40.0
+lateral_thrust = 5.0
+health = 300.0
+
+[node name="turret" parent="." index="2" unique_id=1673077848 instance=ExtResource("2_yoqtp")]
+position = Vector2(1, 5)
+damage = 50.0
+fire_rate = 0.1
+range_ = 250.0
+
+[node name="turret2" parent="." index="3" unique_id=1476543887 instance=ExtResource("2_yoqtp")]
+position = Vector2(1, -6)
+damage = 50.0
+fire_rate = 0.1
+range_ = 250.0
+
+[node name="ShieldShipSprite" type="AnimatedSprite2D" parent="." index="5" unique_id=895631207]
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_bcdae")
+animation = &"enemy"
+
+[node name="shield" type="Area2D" parent="." index="6" unique_id=1350906331]
+script = ExtResource("4_bcdae")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="shield" index="0" unique_id=1783093993]
+position = Vector2(150, -2)
+polygon = PackedVector2Array(0, 0, -5, 44, -26, 87, -62, 126, -126, 150, -179, 149, -235, 125, -272, 84, -299, 30, -298, -22, -276, -79, -236, -123, -188, -142, -126, -146, -69, -125, -22, -79, 0, 0, 11, -10, -8, -79, -59, -139, -123, -161, -193, -157, -244, -138, -290, -87, -311, -20, -313, 35, -283, 100, -243, 139, -184, 165, -124, 166, -53, 140, -9, 100, 11, 49, 11, -11)
+
+[node name="healthbar" type="Node2D" parent="shield" index="1" unique_id=497286406]
+script = ExtResource("5_ds5ji")
+bar_offset = 50.0
+full_col = Color(0, 1, 1, 1)
+half_col = Color(0, 0.5019608, 0.4862745, 1)
+empty_col = Color(0, 0.21960784, 0.21568628, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="shield" index="2" unique_id=1043157941]
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("11_iuije")

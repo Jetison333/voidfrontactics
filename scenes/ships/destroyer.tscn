@@ -1,5 +1,64 @@
-[gd_scene load_steps=2 format=3 uid="uid://clu6dkf1khs6c"]
+[gd_scene load_steps=10 format=3 uid="uid://clu6dkf1khs6c"]
 
 [ext_resource type="PackedScene" uid="uid://c00yc15giv5p5" path="res://scenes/ships/ship.tscn" id="1_akfdk"]
+[ext_resource type="PackedScene" uid="uid://b5aigp5udwa67" path="res://scenes/weapons/turret.tscn" id="2_pobmw"]
+[ext_resource type="Texture2D" uid="uid://c3l3u5hfxssgx" path="res://assets/RedDestroyer/Red_Destroyer_0000.png" id="3_bkb6l"]
+[ext_resource type="Texture2D" uid="uid://dv5ahyatbv08x" path="res://assets/RedDestroyer/Red_Destroyer_0001.png" id="4_7q1x6"]
+[ext_resource type="Texture2D" uid="uid://bu3hd7ta8pt1v" path="res://assets/RedDestroyer/Red_Destroyer_0002.png" id="5_7fpau"]
+[ext_resource type="Texture2D" uid="uid://3lgko0i5ih63" path="res://assets/BlueDestoyer/Blue_Destroyer_0000.png" id="6_ynp4x"]
+[ext_resource type="Texture2D" uid="uid://cpsfja4w1xety" path="res://assets/BlueDestoyer/Blue_Destroyer_0001.png" id="7_m8tqh"]
+[ext_resource type="Texture2D" uid="uid://liwg4porusew" path="res://assets/BlueDestoyer/Blue_Destroyer_0002.png" id="8_jk7o0"]
 
-[node name="Ship" instance=ExtResource("1_akfdk")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_pobmw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bkb6l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7q1x6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7fpau")
+}],
+"loop": true,
+"name": &"enemy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ynp4x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m8tqh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jk7o0")
+}],
+"loop": true,
+"name": &"player",
+"speed": 5.0
+}]
+
+[node name="Ship" node_paths=PackedStringArray("ShipSprite") instance=ExtResource("1_akfdk")]
+ShipSprite = NodePath("destroyerSprite")
+turn_speed = 2.0
+max_speed = 20.0
+forward_thrust = 50.0
+lateral_thrust = 10.0
+health = 300.0
+
+[node name="turret" parent="." index="3" instance=ExtResource("2_pobmw")]
+position = Vector2(7, -14)
+damage = 20.0
+range_ = 200.0
+
+[node name="turret2" parent="." index="4" instance=ExtResource("2_pobmw")]
+position = Vector2(7, 15)
+damage = 20.0
+range_ = 200.0
+
+[node name="destroyerSprite" type="AnimatedSprite2D" parent="." index="5"]
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_pobmw")
+animation = &"player"

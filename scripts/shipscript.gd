@@ -1,18 +1,19 @@
 extends RigidBody2D
 class_name Ship
 
-@export var player_sprite: Texture2D
-@export var enemy_sprite: Texture2D
-
 @export var team: String = "player"
+@export var ShipSprite: AnimatedSprite2D
 @export var turn_speed: float = 3.0
 @export var max_speed: float = 400
 @export var forward_thrust: float = 500.0
 @export var lateral_thrust: float = 200.0
 @export var health: float = 100.0
+@export var patrol: Array[Vector2]
 
+var curr_health: float
 var stopping_distance: float
 var destination: Vector2
+var patrol_index: int
 
 func set_selected(selected: bool) -> void:
 	$SelectedSprite.visible = selected
@@ -20,16 +21,29 @@ func set_selected(selected: bool) -> void:
 func set_destination(dest: Vector2) ->void:
 	destination = dest
 
+func take_damage(amount: float) -> void:
+	curr_health -= amount
+	$healthbar.draw_health(curr_health / health)
+	queue_redraw()
+	if curr_health <= 0:
+		queue_free()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("ships")
 	destination = position
+	patrol_index = 0
 	stopping_distance = (max_speed * max_speed) / (2 * forward_thrust)
-	$ShipSprite.texture = player_sprite if team == "player" else enemy_sprite
+	curr_health = health
+	ShipSprite.play(team)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if patrol.size() == 0:
+		return
+	if (position - patrol[patrol_index]).length() < 10:
+		patrol_index = (patrol_index + 1) % patrol.size()
+	destination = patrol[patrol_index]
 
 func _physics_process(delta: float) -> void:
 	var distance = (destination - global_position).length()
@@ -48,7 +62,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Rotate ship toward thrust direction
 	var target_angle
-	if linear_velocity.length() > 50:
+	if true or linear_velocity.length() > max_speed / 100:
 		target_angle = desired_thrust.angle()
 	else:
 		target_angle = rotation

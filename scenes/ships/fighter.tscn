@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://diiihyr87jodb"]
+
+[ext_resource type="PackedScene" uid="uid://c00yc15giv5p5" path="res://scenes/ships/ship.tscn" id="1_2e1yv"]
+[ext_resource type="PackedScene" uid="uid://b5aigp5udwa67" path="res://scenes/weapons/turret.tscn" id="2_rwqom"]
+[ext_resource type="Texture2D" uid="uid://poe3yhbkj17u" path="res://assets/FighterShipRed/Red_Fighter_1.png" id="3_1q2j0"]
+[ext_resource type="Texture2D" uid="uid://cjtit578tlp7j" path="res://assets/FighterShipRed/Red_Fighter_2.png" id="4_cn4e2"]
+[ext_resource type="Texture2D" uid="uid://37xltjxsxlef" path="res://assets/FighterShipRed/Red_Fighter_3.png" id="5_4nkuu"]
+[ext_resource type="Texture2D" uid="uid://bfj7ve8vyb7fo" path="res://assets/FighterShipBlue/Blue_Fighter_1.png" id="6_c4tlg"]
+[ext_resource type="Texture2D" uid="uid://b5mw046he1l5a" path="res://assets/FighterShipBlue/Blue_Fighter_2.png" id="7_botx4"]
+[ext_resource type="Texture2D" uid="uid://ygrglseluusj" path="res://assets/FighterShipBlue/Blue_Fighter_3.png" id="8_3x0ak"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c4tlg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1q2j0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cn4e2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4nkuu")
+}],
+"loop": true,
+"name": &"enemy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_c4tlg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_botx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3x0ak")
+}],
+"loop": true,
+"name": &"player",
+"speed": 5.0
+}]
+
+[node name="Ship" node_paths=PackedStringArray("ShipSprite") instance=ExtResource("1_2e1yv")]
+ShipSprite = NodePath("fightersprite")
+turn_speed = 4.0
+max_speed = 50.0
+forward_thrust = 80.0
+lateral_thrust = 40.0
+health = 250.0
+
+[node name="turret" parent="." index="2" instance=ExtResource("2_rwqom")]
+position = Vector2(3, -9)
+damage = 5.0
+fire_rate = 3.0
+range_ = 150.0
+
+[node name="turret2" parent="." index="3" instance=ExtResource("2_rwqom")]
+position = Vector2(3, 9)
+damage = 5.0
+fire_rate = 3.0
+range_ = 150.0
+
+[node name="fightersprite" type="AnimatedSprite2D" parent="." index="4"]
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_c4tlg")
+animation = &"player"

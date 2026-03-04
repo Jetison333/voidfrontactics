@@ -1,25 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://c00yc15giv5p5"]
+[gd_scene format=3 uid="uid://c00yc15giv5p5"]
 
 [ext_resource type="Script" uid="uid://cj2mfkb6cvile" path="res://scripts/shipscript.gd" id="1_3cxh5"]
-[ext_resource type="Texture2D" uid="uid://b6w4a2kkwt6cy" path="res://assets/ship.png" id="2_jt8rb"]
+[ext_resource type="Script" uid="uid://2sndhwxn18qr" path="res://scenes/ships/healthbar.gd" id="3_jt8rb"]
 [ext_resource type="Texture2D" uid="uid://bax8kp50qbelq" path="res://assets/selected.png" id="3_k8gom"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p68iw"]
+radius = 21.023796
 
-[node name="Ship" type="RigidBody2D"]
+[node name="Ship" type="RigidBody2D" unique_id=337084416]
 gravity_scale = 0.0
 script = ExtResource("1_3cxh5")
-player_sprite = ExtResource("2_jt8rb")
-enemy_sprite = ExtResource("2_jt8rb")
 
-[node name="ShipSprite" type="Sprite2D" parent="."]
-rotation = 1.5707964
-texture = ExtResource("2_jt8rb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(10.275, 10.275)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=139945158]
 shape = SubResource("CircleShape2D_p68iw")
 
-[node name="SelectedSprite" type="Sprite2D" parent="."]
+[node name="SelectedSprite" type="Sprite2D" parent="." unique_id=1217056337]
 visible = false
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_k8gom")
+
+[node name="healthbar" type="Node2D" parent="." unique_id=1082415846]
+script = ExtResource("3_jt8rb")

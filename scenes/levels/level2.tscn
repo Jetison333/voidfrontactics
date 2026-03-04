@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu1e4mlx8w2rv"]
+
+[ext_resource type="PackedScene" uid="uid://b2w0nnuo4060i" path="res://scenes/world.tscn" id="1_e0cvd"]
+[ext_resource type="PackedScene" uid="uid://clu6dkf1khs6c" path="res://scenes/ships/destroyer.tscn" id="2_niitk"]
+[ext_resource type="PackedScene" uid="uid://diiihyr87jodb" path="res://scenes/ships/fighter.tscn" id="3_d5djh"]
+[ext_resource type="PackedScene" uid="uid://dqp0fmnsb0psm" path="res://scenes/ships/shield.tscn" id="4_ok6xr"]
+
+[node name="Node2D" instance=ExtResource("1_e0cvd")]
+
+[node name="Ship" parent="." index="4" instance=ExtResource("2_niitk")]
+position = Vector2(154, 88)
+
+[node name="Ship2" parent="." index="5" instance=ExtResource("3_d5djh")]
+position = Vector2(88, 141)
+
+[node name="Ship3" parent="." index="6" instance=ExtResource("3_d5djh")]
+position = Vector2(182, 151)
+
+[node name="Ship4" parent="." index="7" instance=ExtResource("4_ok6xr")]
+position = Vector2(832, 882)
+team = "enemy"
+patrol = Array[Vector2]([Vector2(100, 900), Vector2(900, 450), Vector2(100, 100)])
+
+[node name="Ship6" parent="." index="8" instance=ExtResource("2_niitk")]
+position = Vector2(933, 862)
+team = "enemy"
+patrol = Array[Vector2]([Vector2(100, 900), Vector2(900, 450), Vector2(100, 100)])
